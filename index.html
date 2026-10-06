@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Big Head Brawl: 8-player shootouts for your phone</title>
-<meta name="description" content="Fast 8-player shootouts on small, colorful maps. Ranked seasons, voice chat, free on Android.">
+<meta name="description" content="Fast 8-player shootouts on small, colorful maps. Play SOLO, DUO or SQUAD with friends, with ranked seasons and voice chat. Free on Android.">
 <meta name="theme-color" content="#8FD0F7">
 <link rel="canonical" href="https://bigheadbrawl.tech/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Big Head Brawl">
 <meta property="og:title" content="Big Head Brawl">
-<meta property="og:description" content="Fast 8-player shootouts on small, colorful maps. Free on Android.">
+<meta property="og:description" content="Fast 8-player shootouts on small, colorful maps. Squad up with friends. Free on Android.">
 <meta property="og:url" content="https://bigheadbrawl.tech/">
 <meta property="og:image" content="https://bigheadbrawl.tech/img/share.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -101,18 +101,39 @@ h2{font-size:clamp(38px,5vw,58px);line-height:1.05}
 .step div{display:flex;flex-direction:column;gap:8px}
 h3{font-size:27px}
 
-/* Ranked */
+/* Squads and ranked */
+#squad{background:var(--sky);padding:104px 24px}
 #ranked{background:var(--pale);padding:104px 24px}
-#ranked>.wrap{display:flex;flex-direction:column;gap:96px}
+#squad>.wrap,#ranked>.wrap{display:flex;flex-direction:column;gap:96px}
 .split{display:flex;flex-wrap:wrap;align-items:center;gap:56px}
+.split.flip{flex-direction:row-reverse}
+.sub{font-size:clamp(30px,3.6vw,42px);line-height:1.05}
 .split-text{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .split-text .intro{line-height:1.6;max-width:38ch}
 .split-shot{flex:1.6 1 560px;min-width:0}
 .split-shot img{width:100%;aspect-ratio:2340/1080;object-fit:cover;border-radius:22px;border:10px solid var(--navy)}
+.split-shot img.native{aspect-ratio:auto}
 .features{display:flex;flex-wrap:wrap;gap:48px}
-.feature{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.feature{flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:14px}
 .feature .body{line-height:1.6}
 .tile{width:56px;height:56px;border-radius:14px;background:var(--accent);box-shadow:0 5px 0 var(--accent-edge);display:flex;align-items:center;justify-content:center}
+
+/* What's new */
+#news .wrap{display:flex;flex-direction:column;gap:44px}
+.log{display:flex;flex-direction:column;gap:14px;max-width:880px}
+.release{background:var(--navy);border:3px solid var(--navy-line);border-radius:20px}
+.release summary{display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:20px 24px;cursor:pointer;list-style:none;border-radius:17px}
+.release summary::-webkit-details-marker{display:none}
+.release summary:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.release summary:hover .chev{color:#fff}
+.ver{font-family:var(--title);font-size:26px;line-height:1;color:var(--accent)}
+.release h3{font-size:23px;color:#fff}
+.release time{margin-left:auto;font-size:15px;font-weight:700;color:var(--muted)}
+.pill{font-family:var(--title);font-size:15px;line-height:1;padding:6px 11px;border-radius:999px;background:var(--grass);color:#fff}
+.chev{flex:0 0 auto;color:var(--muted);transition:transform .15s}
+.release[open] .chev{transform:rotate(180deg)}
+.release ul{margin:0;padding:0 24px 22px 46px;display:flex;flex-direction:column;gap:8px;font-size:17px;line-height:1.5;color:var(--muted)}
+.release li::marker{color:var(--accent)}
 
 /* Download */
 #download{background:var(--accent)}
@@ -143,16 +164,21 @@ footer nav a{padding:10px 0}
 footer p{font-size:15px;color:var(--muted)}
 
 @media (max-width:600px){
-  header,section,#ranked,#build,.hero{padding-left:16px;padding-right:16px}
-  section,#ranked{padding-top:72px;padding-bottom:72px}
+  header,section,#squad,#ranked,#build,.hero{padding-left:16px;padding-right:16px}
+  section,#squad,#ranked{padding-top:72px;padding-bottom:72px}
   .hero{padding-bottom:96px}
   .btn{font-size:21px;padding:16px 24px}
   .lede{font-size:20px}
   .card{padding:24px}
+  .release summary{padding:18px}
+  .release h3{order:1;flex-basis:100%}
+  .release time{order:2;margin-left:0;flex-basis:100%}
+  .chev{margin-left:auto}
+  .release ul{padding:0 18px 20px 38px;font-size:16px}
   .c1{top:96px;right:16px;width:110px;height:34px}
   .c2,.c3{display:none}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.chev{transition:none}}
 </style>
 </head>
 <body>
@@ -163,7 +189,9 @@ footer p{font-size:15px;color:var(--muted)}
 <a class="brand" href="#top"><img src="img/icon.webp" alt="" width="44" height="44">Big Head Brawl</a>
 <nav aria-label="Main">
 <a href="#how">How it plays</a>
+<a href="#squad">Squads</a>
 <a href="#ranked">Ranked</a>
+<a href="#news">What's new</a>
 <a href="#build">How it's built</a>
 <a class="btn btn-gold" href="#download">Download</a>
 </nav>
@@ -177,12 +205,12 @@ footer p{font-size:15px;color:var(--muted)}
 <div class="wrap">
 <div class="hero-text">
 <h1>Big Head Brawl</h1>
-<p class="lede">Fast 8-player shootouts on small, colorful maps. First to 20 kills wins.</p>
+<p class="lede">Fast 8-player shootouts on small, colorful maps. Play solo, or squad up with friends.</p>
 <div class="btns">
 <a class="btn btn-gold" data-apk href="https://github.com/SameerArora497/bigheadbrawl/releases/latest/download/BigHeadBrawl.apk">Download APK</a>
 <a class="btn btn-navy" href="#install">How to install</a>
 </div>
-<p class="fine">Free on Android <span data-release>(beta 0.1.14, 92 MB)</span>. Google Play and iPhone are coming.</p>
+<p class="fine">Free on Android <span data-release>(beta 0.1.17, 92 MB)</span>. Google Play and iPhone are coming.</p>
 </div>
 <div class="hero-shot">
 <figure>
@@ -199,31 +227,73 @@ footer p{font-size:15px;color:var(--muted)}
 <div class="wrap">
 <div class="section-head">
 <h2>How a match plays out</h2>
-<p class="intro">Every online match is a free-for-all for eight players on one small map. Matches are short, and every one counts toward your rank.</p>
+<p class="intro">Every online match has eight players on one small map. Play SOLO, every player for themselves, DUO in four teams of two, or SQUAD, four against four. Every match counts toward your rank.</p>
 </div>
 <ol class="steps">
 <li>
-<img src="img/lobby.webp" width="960" height="443" loading="lazy" alt="Game lobby with a blocky character, the Harbor Docks map card and a Start button">
+<img src="img/lobby-party.webp" width="960" height="444" loading="lazy" alt="Lobby with two party members side by side, DUO picked on the mode card, the party list and a Start button">
 <div class="step"><span class="step-num">1</span><div>
-<h3>Hit Start</h3>
-<p class="body">Start finds you a room and drops you straight into its map. Bots take any places nobody has, so every match has eight.</p>
+<h3>Pick a mode, hit Start</h3>
+<p class="body">Choose SOLO, DUO or SQUAD, alone or with your party. Start drops you into a room's map, or into a match that has just begun. Bots take any places nobody has, so every match has eight.</p>
 </div></div>
 </li>
 <li>
-<img src="img/victory.webp" width="960" height="443" loading="lazy" alt="Victory scoreboard showing first place out of eight with 20 kills, kill streaks and an MVP tag">
+<img src="img/victory-squad.webp" width="960" height="444" loading="lazy" alt="Victory scoreboard in SQUAD: first of two teams after reaching 40 kills, the winning team's four players in blue">
 <div class="step"><span class="step-num">2</span><div>
-<h3>Race to 20 kills</h3>
-<p class="body">Warm up in your own corner of the map while the countdown runs. Then the walls drop and it's every player for themselves. Streaks and MVP land on the final scoreboard.</p>
+<h3>Race to 40 kills</h3>
+<p class="body">Warm up in your own zone while the countdown runs. Then the walls drop and the first player or team to 40 kills wins. Streaks and MVP land on the final scoreboard.</p>
 </div></div>
 </li>
 <li>
 <img src="img/rank-up.webp" width="960" height="443" loading="lazy" alt="Rank up screen revealing the Rampage 4 badge after a match">
 <div class="step"><span class="step-num">3</span><div>
 <h3>Earn RP, rank up</h3>
-<p class="body">Every online match earns ranked points, win or lose, and RP never goes down. Climb from Rookie to Champion over the season.</p>
+<p class="body">Every online match earns ranked points, win or lose, and RP never goes down. Climb from Rookie to Champion in each mode over the season.</p>
 </div></div>
 </li>
 </ol>
+</div>
+</section>
+
+<section id="squad">
+<div class="wrap">
+<div class="split">
+<div class="split-text">
+<h2>Squad up with friends</h2>
+<p class="intro">Add friends by their Player ID and invite them to a party of up to four. You stand together in the lobby, talk before the match, and always play on the same team.</p>
+</div>
+<div class="split-shot">
+<img src="img/party-invite.webp" width="1600" height="739" loading="lazy" alt="Party invite pop-up in the lobby: a friend invites you to their DUO party, with Accept and Decline buttons">
+</div>
+</div>
+
+<div class="split flip">
+<div class="split-text">
+<h3 class="sub">Talk to everyone, or just your team</h3>
+<p class="intro">In a match, the MIC and SPEAKER buttons each switch between ALL, TEAM and OFF. By default you hear everyone and only your team hears you. Tap a player on the voice bar to mute them.</p>
+</div>
+<div class="split-shot">
+<img class="native" src="img/voice.webp" width="1280" height="576" loading="lazy" alt="Match countdown in DUO with the MIC and SPEAKER buttons on the left, both set to ALL">
+</div>
+</div>
+
+<div class="features">
+<div class="feature">
+<div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M19 8v6M16 11h6"/></svg></div>
+<h3>Friends list</h3>
+<p class="body">See which friends are online, in a match or offline, and invite them to your party with one tap.</p>
+</div>
+<div class="feature">
+<div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17 3 7l5 4 4-6 4 6 5-4-1 10z"/><path d="M4 21h16"/></svg></div>
+<h3>The leader decides</h3>
+<p class="body">The party leader picks the mode and starts. AUTO-FILL on teams you up with other players; off keeps your team to friends and bots.</p>
+</div>
+<div class="feature">
+<div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 2 4 4 4-4"/><circle cx="12" cy="12" r="3.5"/><path d="M5 22a7 7 0 0 1 14 0"/></svg></div>
+<h3>Teammates in blue</h3>
+<p class="body">A blue arrow and name over every teammate, blue dots on the minimap, and your team's score against the best other team.</p>
+</div>
+</div>
 </div>
 </section>
 
@@ -231,19 +301,34 @@ footer p{font-size:15px;color:var(--muted)}
 <div class="wrap">
 <div class="split">
 <div class="split-text">
-<h2>Ranked seasons with a top 100</h2>
-<p class="intro">Your rank, wins and K/D sit on one screen next to the season leaderboard. Reach Champion and break into the season's top 100 to earn the Big Head Legend title, yours for good.</p>
+<h2>A rank for every mode</h2>
+<p class="intro">SOLO, DUO and SQUAD each have their own rank, leaderboard and top 100. Your rank, wins and K/D sit on one screen next to the season leaderboard.</p>
 </div>
 <div class="split-shot">
 <img src="img/ranked.webp" width="1600" height="738" loading="lazy" alt="Ranked screen with the Rampage 4 badge, season stats and the top 100 leaderboard">
 </div>
 </div>
 
+<div class="split flip">
+<div class="split-text">
+<h3 class="sub">Become a Big Head Legend</h3>
+<p class="intro">Reach Champion and break into the season's top 100 to earn the Big Head Legend title. It's yours for good, even if you're pushed out later.</p>
+</div>
+<div class="split-shot">
+<img src="img/legend.webp" width="1600" height="739" loading="lazy" alt="Big Head Legend title reveal for Season 1: a gold shield badge with a crown and purple wings">
+</div>
+</div>
+
 <div class="features">
 <div class="feature">
-<div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/></svg></div>
-<h3>Talk to your match</h3>
-<p class="body">Voice chat with everyone in your online match. Tap MIC to turn your mic on or off, or tap a player to mute them.</p>
+<div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div>
+<h3>Jump in mid-match</h3>
+<p class="body">If a match has only just begun, Start drops you into it in a bot's place, so you rarely wait.</p>
+</div>
+<div class="feature">
+<div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/></svg></div>
+<h3>Respawn protection</h3>
+<p class="body">Three seconds of protection after every respawn to find your feet. Firing ends it.</p>
 </div>
 <div class="feature">
 <div class="tile"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1B2140" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg></div>
@@ -255,6 +340,88 @@ footer p{font-size:15px;color:var(--muted)}
 <h3>Solo challenge</h3>
 <p class="body">Fight endless waves of bots, with bosses along the way, and try to beat your best wave.</p>
 </div>
+</div>
+</div>
+</section>
+
+<section id="news" class="dark">
+<div class="wrap">
+<div class="section-head">
+<h2>What's new</h2>
+<p class="intro">Every beta so far, newest first. Install a new version over the old one: your account and rank stay.</p>
+</div>
+<div class="log">
+<details class="release" open>
+<summary><span class="ver">0.1.17</span><h3>Friends and team voice</h3><span class="pill">Latest</span><time datetime="2026-10-07">7 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>Friends: add friends by Player ID, see who's online, in a match or offline, and invite them to your party.</li>
+<li>Party voice chat in the lobby, with a MIC button on the PARTY card.</li>
+<li>MIC and SPEAKER buttons in matches, each set to ALL, TEAM or OFF.</li>
+<li>A settings gear in matches, beside LEAVE.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.16</span><h3>Room search fix</h3><time datetime="2026-10-06">6 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>Start finds a free room every time again. Since 0.1.14 it could skip rooms and keep retrying the last one.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.15</span><h3>SOLO, DUO and SQUAD</h3><time datetime="2026-10-06">6 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>Three modes: SOLO, DUO (four teams of two) and SQUAD (four against four), all with eight players.</li>
+<li>Parties of up to four, always on one team. The leader picks the mode and AUTO-FILL.</li>
+<li>Each mode has its own rank, leaderboard and top 100. Your rank so far became your SOLO rank.</li>
+<li>Every mode plays to 40 kills, with a 15-minute clock.</li>
+<li>Join a match that has just begun, in a bot's place.</li>
+<li>Three seconds of respawn protection, ended by firing.</li>
+<li>Teammates marked in blue over their heads and on the minimap, and team scores at the top.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.14</span><h3>Straight into the map</h3><time datetime="2026-10-06">6 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>No more queue: Start takes you straight into a room's map with a 60-second countdown.</li>
+<li>You wait in a zone of your own behind see-through walls, which drop when the match starts.</li>
+<li>Bots arrive one by one to fill the room to eight.</li>
+<li>Rooms move on to the next map after every match.</li>
+<li>When every room is busy, Start keeps looking for up to three minutes.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.13</span><h3>Voice chat</h3><time datetime="2026-10-05">5 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>Voice chat with everyone in your online match, with a MIC button on screen.</li>
+<li>The voice bar shows who's talking; tap a player to mute them.</li>
+<li>Settings → Sound: voice chat on or off, and TEST MIC to hear yourself back.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.12</span><h3>Ranked seasons</h3><time datetime="2026-10-05">5 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>Ranked: 14 levels from Rookie to Champion. Every online match earns RP, and RP never goes down.</li>
+<li>Four-week seasons, a top 100 leaderboard, and the Big Head Legend title.</li>
+<li>Rank badges in the lobby and on the scoreboard, a rank-up animation, career wins and K/D.</li>
+<li>Online play needs a Google sign-in.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.11</span><h3>The new look</h3><time datetime="2026-10-04">4 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>New characters with big heads, ten hair styles and a new CHARACTER screen.</li>
+<li>Both maps rebuilt at 80 × 80 m in eight zones, with rooftops and walkways up ladders and an ammo crate in every zone.</li>
+<li>A 90° field of view on every screen.</li>
+<li>Gyro aim, and a button layout editor with an optional second FIRE button.</li>
+</ul>
+</details>
+<details class="release">
+<summary><span class="ver">0.1.2–0.1.10</span><h3>Earlier betas</h3><time datetime="2026-10-03">3–4 Oct 2026</time><svg class="chev" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+<ul>
+<li>The first betas: the lobby, character looks, Monsoon Market and Harbor Docks, bots and the solo challenge.</li>
+<li>Online play on twelve rooms, Google sign-in and ammo crates.</li>
+<li>The name Big Head Brawl and its icon.</li>
+</ul>
+</details>
 </div>
 </div>
 </section>
@@ -276,7 +443,7 @@ footer p{font-size:15px;color:var(--muted)}
 <ol class="install">
 <li><span>1</span><p class="body">Tap Download APK on your Android phone.</p></li>
 <li><span>2</span><p class="body">Open the file. If Android asks, allow installs from your browser. If Play Protect warns you, tap More details, then Install anyway.</p></li>
-<li><span>3</span><p class="body">Install, sign in with Google, and tap Start.</p></li>
+<li><span>3</span><p class="body">Install, sign in with Google, pick a mode and tap Start.</p></li>
 </ol>
 <p class="note">When a new version comes out, the game asks you to update. Download the new APK here and install it over the old one: your account and rank stay.</p>
 </div>
@@ -296,7 +463,7 @@ footer p{font-size:15px;color:var(--muted)}
 </div>
 <div class="fact">
 <h3>Matchmaking with bot fill</h3>
-<p>Twelve public rooms, each running one match. Bots take the places nobody has, so matches start full.</p>
+<p>Twelve public rooms across SOLO, DUO and SQUAD, each running one match. Bots fill the places nobody has and hand them over to people who join.</p>
 </div>
 <div class="fact">
 <h3>Frame rate first</h3>
